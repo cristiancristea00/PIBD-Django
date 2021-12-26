@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.urls import path
 
-from . import views
+from IJR.views import *
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('judecatori/', views.judecatori, name='judecatori'),
-    path('procese/', views.procese, name='procese'),
-    path('programari/', views.programari, name='programari'),
+    path('', HomePageView.as_view(), name='index'),
+    path('judecatori', JudecatoriPageView.as_view(), name='judecatori'),
+    path('procese', ProcesePageView.as_view(), name='procese'),
+    path('programari', ProgramariPageView.as_view(), name='programari'),
 ]

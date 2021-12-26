@@ -1,19 +1,20 @@
-from django.http import HttpResponse
+from django.views.generic import TemplateView
 
 
 # Create your views here.
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the IJR index.")
+
+class HomePageView(TemplateView):
+    template_name = 'index.html'
 
 
-def judecatori(request):
-    return HttpResponse("Hello, world. You're at the IJR Judecatori.")
+class JudecatoriPageView(TemplateView):
+    template_name = 'judecatori.html'
 
 
-def procese(request):
-    return HttpResponse("Hello, world. You're at the IJR Procese.")
+class ProcesePageView(TemplateView):
+    template_name = 'procese.html'
 
 
-def programari(request):
-    return HttpResponse("Hello, world. You're at the IJR Programari.")
+class ProgramariPageView(TemplateView):
+    template_name = 'programari.html'
