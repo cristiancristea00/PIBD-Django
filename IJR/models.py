@@ -71,10 +71,10 @@ class Proces(models.Model):
         ordering = ['numar']
 
     def __str__(self):
-        return self.numar_obiect
+        return self.represent
 
     @property
-    def numar_obiect(self):
+    def represent(self):
         return F"{self.numar} ({self.obiect})"
 
 

@@ -1,0 +1,36 @@
+* {
+    font-family: 'Readex Pro', sans-serif;
+}
+
+.dataTables_filter {
+    margin-bottom: 6px;
+}
+
+.title {
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center !important;
+}
+
+.header {
+    font-size: 1.5em;
+    text-align: center !important;
+}
+
+td {
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
+
+th {
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
+
+.fix-button {
+    min-width: 280px !important;
+    max-width: 280px !important;
+    min-height: 80px !important;
+    max-height: 80px !important;
+    height: 80px !important;
+}

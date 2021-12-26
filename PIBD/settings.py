@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
+from django.contrib import messages
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -24,7 +27,7 @@ SECRET_KEY = 'django-insecure-%a=9)w*a429w_o0g_d34#5^x_b)10jf%%k&%wakdtq4ehh(x9n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
@@ -110,13 +113,32 @@ USE_I18N = True
 
 USE_TZ = True
 
+DECIMAL_SEPARATOR = ','
+
+THOUSAND_SEPARATOR = '.'
+
+USE_THOUSAND_SEPARATOR = True
+
+NUMBER_GROUPING = 3
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Message tags
+# https://docs.djangoproject.com/en/4.0/ref/settings/#message-tags
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'DEBUG',
+    messages.INFO: 'INFO',
+    messages.SUCCESS: 'SUCCESS',
+    messages.WARNING: 'WARNING',
+    messages.ERROR: 'ERROR',
+}
