@@ -15,7 +15,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'IJR/css/styles.css' %}">
 
     <script>
         $(document).ready(function () {
@@ -87,7 +88,7 @@
                 <h5 class="modal-title" id="procese_update_modal_label">Modifică un proces</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form autocomplete="on" action="Procese" method="POST">
+            <form autocomplete="on" action="procese" method="POST">{% csrf_token %}
                 <div class="modal-body">
 
                     <div class="row g-3">
@@ -97,6 +98,8 @@
                                         id="Select_proces_Update">
                                     {% for proces in procese %}
                                         <option value="{{ proces.id_proces }}">{{ proces.represent }}</option>
+                                    {% empty %}
+                                        <option value="" selected>NU există niciun proces</option>
                                     {% endfor %}
                                 </select>
                                 <label for="Select_proces_Update">Proces</label>
@@ -178,7 +181,7 @@
                 <h5 class="modal-title" id="procese_delete_modal_label">Șterge un proces</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form autocomplete="on" action="Procese" method="POST">
+            <form autocomplete="on" action="procese" method="POST">{% csrf_token %}
                 <div class="modal-body">
 
                     <div class="row g-3">
@@ -188,6 +191,8 @@
                                         id="Select_proces_Delete">
                                     {% for proces in procese %}
                                         <option value="{{ proces.id_proces }}">{{ proces.represent }}</option>
+                                    {% empty %}
+                                        <option value="" selected>NU există niciun proces</option>
                                     {% endfor %}
                                 </select>
                                 <label for="Select_proces_Delete">Judecător</label>

@@ -16,7 +16,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'IJR/css/styles.css' %}">
 
 
     <script>
@@ -89,7 +90,7 @@
                 <h5 class="modal-title" id="programari_update_modal_label">Modifică o programare</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form autocomplete="on" action="Programari" method="POST">
+            <form autocomplete="on" action="programari" method="POST">{% csrf_token %}
                 <div class="modal-body">
 
                     <div class="row g-3">
@@ -99,6 +100,8 @@
                                         id="Select_programare_Update">
                                     {% for programare in programari %}
                                         <option value="{{ programare.id_programare }}">{{ programare.represent }}</option>
+                                    {% empty %}
+                                        <option value="" selected>NU există nicio programare</option>
                                     {% endfor %}
                                 </select>
                                 <label for="Select_programare_Update">Programare</label>
@@ -164,7 +167,7 @@
                 <h5 class="modal-title" id="programari_delete_modal_label">Șterge o programare</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form autocomplete="on" action="Programari" method="POST">
+            <form autocomplete="on" action="programari" method="POST">{% csrf_token %}
                 <div class="modal-body">
 
                     <div class="row g-3">
@@ -174,6 +177,8 @@
                                         id="Select_programare_Delete">
                                     {% for programare in programari %}
                                         <option value="{{ programare.id_programare }}">{{ programare.represent }}</option>
+                                    {% empty %}
+                                        <option value="" selected>NU există nicio programare</option>
                                     {% endfor %}
                                 </select>
                                 <label for="Select_programare_Delete">Programare</label>

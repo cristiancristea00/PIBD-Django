@@ -16,7 +16,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'IJR/css/styles.css' %}">
 
     <script>
         $(document).ready(function () {
@@ -88,7 +89,7 @@
                 <h5 class="modal-title" id="judecatori_update_modal_label">Modifică un judecător</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form autocomplete="on" action="Judecatori" method="POST">
+            <form autocomplete="on" action="judecatori" method="POST">{% csrf_token %}
                 <div class="modal-body">
 
                     <div class="row g-3">
@@ -98,6 +99,8 @@
                                         id="Select_judecator_Update">
                                     {% for judecator in judecatori %}
                                         <option value="{{ judecator.id_judecator }}">{{ judecator.represent }}</option>
+                                    {% empty %}
+                                        <option value="" selected>NU există niciun judecător</option>
                                     {% endfor %}
                                 </select>
                                 <label for="Select_judecator_Update">Judecător</label>
@@ -206,7 +209,7 @@
                 <h5 class="modal-title" id="judecatori_delete_modal_label">Șterge un judecător</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form autocomplete="on" action="Judecatori" method="POST">
+            <form autocomplete="on" action="judecatori" method="POST">{% csrf_token %}
                 <div class="modal-body">
 
                     <div class="row g-3">
@@ -216,6 +219,8 @@
                                         id="Select_judecator_Delete">
                                     {% for judecator in judecatori %}
                                         <option value="{{ judecator.id_judecator }}">{{ judecator.represent }}</option>
+                                    {% empty %}
+                                        <option value="" selected>NU există niciun judecător</option>
                                     {% endfor %}
                                 </select>
                                 <label for="Select_judecator_Delete">Judecător</label>

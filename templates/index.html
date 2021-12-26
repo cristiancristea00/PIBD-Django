@@ -17,7 +17,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'IJR/css/styles.css' %}">
 
     <title>IJR</title>
 
@@ -90,7 +91,7 @@
                 <h5 class="modal-title" id="judecatori_add_modal_label">Adaugă un judecător nou</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form autocomplete="on" action="Judecatori" method="POST">
+            <form autocomplete="on" action="" method="POST">{% csrf_token %}
                 <div class="modal-body">
 
                     <div class="row g-3">
@@ -196,7 +197,7 @@
                 <h5 class="modal-title" id="procese_add_modal_label">Adaugă un proces nou</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form autocomplete="on" action="Procese" method="POST">
+            <form autocomplete="on" action="" method="POST">{% csrf_token %}
                 <div class="modal-body">
 
                     <div class="row g-3">
@@ -274,7 +275,7 @@
                 <h5 class="modal-title" id="programari_add_modal_label">Adaugă o programare nouă</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form autocomplete="on" action="Programari" method="POST">
+            <form autocomplete="on" action="" method="POST">{% csrf_token %}
                 <div class="modal-body">
 
                     <div class="row g-3">
@@ -284,6 +285,8 @@
                                         required>
                                     {% for proces in procese %}
                                         <option value="{{ proces.id_proces }}">{{ proces.represent }}</option>
+                                    {% empty %}
+                                        <option value="" selected>NU există niciun proces</option>
                                     {% endfor %}
                                 </select>
                                 <label for="ID_Proces_add">Proces</label>
@@ -296,6 +299,8 @@
                                         required>
                                     {% for judecator in judecatori %}
                                         <option value="{{ judecator.id_judecator }}">{{ judecator.represent }}</option>
+                                    {% empty %}
+                                        <option value="" selected>NU există niciun judecător</option>
                                     {% endfor %}
                                 </select>
                                 <label for="ID_Judecator_add">Judecător</label>
