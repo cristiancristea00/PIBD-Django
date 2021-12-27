@@ -1,4 +1,5 @@
 from dateutil.parser import parse
+from django.db import transaction
 from django.views.generic import TemplateView
 
 from IJR.models import Judecator
@@ -10,7 +11,8 @@ class JudecatoriPageView(TemplateView):
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
-        judecatori = Judecator.objects.all()
+        with transaction.atomic():
+            judecatori = Judecator.objects.all()
         context['judecatori'] = judecatori
         return context
 
@@ -18,7 +20,9 @@ class JudecatoriPageView(TemplateView):
 
         if self.request.POST.get('updateJudecator', None) is not None:
 
-            judecator = Judecator.objects.get(id_judecator=int(self.request.POST.get('Select_judecator_Update', None)))
+            with transaction.atomic():
+                judecator = Judecator.objects.get(id_judecator=int(self.request.POST.get('Select_judecator_Update', None)))
+
             cnp = self.request.POST.get('CNP_update', None)
             cnp = cnp if cnp != '' else judecator.cnp
             nume = self.request.POST.get('Nume_update', None)
@@ -39,11 +43,13 @@ class JudecatoriPageView(TemplateView):
             judecator = Judecator(id_judecator=judecator.id_judecator, cnp=cnp, nume=nume, prenume=prenume, telefon=telefon, email=email,
                                   specializare=specializare, preluare_mandat=preluare_mandat, expirare_mandat=expirare_mandat)
 
-            judecator.save(force_update=True)
+            judecator.update()
 
         elif self.request.POST.get('deleteJudecator', None) is not None:
 
-            judecator = Judecator.objects.get(id_judecator=int(self.request.POST.get('Select_judecator_Delete', None)))
-            judecator.delete()
+            with transaction.atomic():
+                judecator = Judecator.objects.get(id_judecator=int(self.request.POST.get('Select_judecator_Delete', None)))
+
+            judecator.remove()
 
         return self.render_to_response(self.get_context_data())

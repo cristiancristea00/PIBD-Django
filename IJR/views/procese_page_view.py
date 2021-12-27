@@ -1,3 +1,4 @@
+from django.db import transaction
 from django.views.generic import TemplateView
 
 from IJR.models import Proces
@@ -9,7 +10,8 @@ class ProcesePageView(TemplateView):
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
-        procese = Proces.objects.all()
+        with transaction.atomic():
+            procese = Proces.objects.all()
         context['procese'] = procese
         return context
 
@@ -34,11 +36,13 @@ class ProcesePageView(TemplateView):
             proces = Proces(id_proces=proces.id_proces, numar=numar, obiect=obiect, materie_juridica=materie_juridica,
                             stadiu_procesual=stadiu_procesual, reclamant=reclamant, parat=parat)
 
-            proces.save(force_update=True)
+            proces.update()
 
         elif self.request.POST.get('deleteProces', None) is not None:
 
-            proces = Proces.objects.get(id_proces=int(self.request.POST.get('Select_proces_Delete', None)))
-            proces.delete()
+            with transaction.atomic():
+                proces = Proces.objects.get(id_proces=int(self.request.POST.get('Select_proces_Delete', None)))
+
+            proces.remove()
 
         return self.render_to_response(self.get_context_data())

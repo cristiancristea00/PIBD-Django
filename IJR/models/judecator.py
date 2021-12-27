@@ -1,6 +1,6 @@
 from typing import Final
 
-from django.db import models
+from django.db import models, transaction
 
 
 class Judecator(models.Model):
@@ -43,3 +43,15 @@ class Judecator(models.Model):
     @property
     def represent(self):
         return F"{self.nume_complet} ({self.cnp})"
+
+    def create(self):
+        with transaction.atomic():
+            self.save(force_insert=True)
+
+    def update(self):
+        with transaction.atomic():
+            self.save(force_update=True)
+
+    def remove(self):
+        with transaction.atomic():
+            self.delete()

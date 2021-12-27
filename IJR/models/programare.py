@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 
 from IJR.models import Judecator, Proces
 
@@ -26,3 +26,15 @@ class Programare(models.Model):
     @property
     def represent(self):
         return F"{self.proces.numar} - {self.judecator.prenume} {self.judecator.nume} ({self.judecator.cnp})"
+
+    def create(self):
+        with transaction.atomic():
+            self.save(force_insert=True)
+
+    def update(self):
+        with transaction.atomic():
+            self.save(force_update=True)
+
+    def remove(self):
+        with transaction.atomic():
+            self.delete()

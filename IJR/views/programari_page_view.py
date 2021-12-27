@@ -1,4 +1,5 @@
 from dateutil.parser import parse
+from django.db import transaction
 from django.views.generic import TemplateView
 
 from IJR.models import Programare
@@ -10,7 +11,8 @@ class ProgramariPageView(TemplateView):
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
-        programari = Programare.objects.all()
+        with transaction.atomic():
+            programari = Programare.objects.all()
         context['programari'] = programari
         return context
 
@@ -18,7 +20,9 @@ class ProgramariPageView(TemplateView):
 
         if self.request.POST.get('updateProgramare', None) is not None:
 
-            programare = Programare.objects.get(id_programare=int(self.request.POST.get('Select_programare_Update', None)))
+            with transaction.atomic():
+                programare = Programare.objects.get(id_programare=int(self.request.POST.get('Select_programare_Update', None)))
+
             judecator = programare.judecator
             proces = programare.proces
             oras = self.request.POST.get('Oras_update', None)
@@ -33,11 +37,13 @@ class ProgramariPageView(TemplateView):
             programare = Programare(id_programare=programare.id_programare, judecator=judecator, proces=proces, oras=oras, locatie=locatie, data=data,
                                     ora=ora)
 
-            programare.save(force_update=True)
+            programare.update()
 
         elif self.request.POST.get('deleteProgramare', None) is not None:
 
-            programare = Programare.objects.get(id_programare=int(self.request.POST.get('Select_programare_Delete', None)))
-            programare.delete()
+            with transaction.atomic():
+                programare = Programare.objects.get(id_programare=int(self.request.POST.get('Select_programare_Delete', None)))
+
+            programare.remove()
 
         return self.render_to_response(self.get_context_data())

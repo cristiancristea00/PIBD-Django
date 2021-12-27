@@ -1,4 +1,5 @@
 from dateutil.parser import parse
+from django.db import transaction
 from django.views.generic import TemplateView
 
 from IJR.models import Judecator, Proces, Programare
@@ -10,7 +11,8 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
-        procese = Proces.objects.all()
+        with transaction.atomic():
+            procese = Proces.objects.all()
         judecatori = Judecator.objects.all()
         context['procese'] = procese
         context['judecatori'] = judecatori
@@ -29,7 +31,7 @@ class HomePageView(TemplateView):
             judecator.specializare = self.request.POST.get('Specializare_add', None)
             judecator.preluare_mandat = parse(self.request.POST.get('Preluare_mandat_add', None))
             judecator.expirare_mandat = parse(self.request.POST.get('Expirare_mandat_add', None))
-            judecator.save(force_insert=True)
+            judecator.create()
 
         elif self.request.POST.get('addProces', None) is not None:
 
@@ -40,12 +42,13 @@ class HomePageView(TemplateView):
             proces.stadiu_procesual = self.request.POST.get('Stadiu_procesual_add', None)
             proces.reclamant = self.request.POST.get('Reclamant_add', None)
             proces.parat = self.request.POST.get('Parat_add', None)
-            proces.save(force_insert=True)
+            proces.create()
 
         elif self.request.POST.get('addProgramare', None) is not None:
 
-            judecator = Judecator.objects.get(id_judecator=int(self.request.POST.get('ID_Judecator_add', None)))
-            proces = Proces.objects.get(id_proces=int(self.request.POST.get('ID_Proces_add', None)))
+            with transaction.atomic():
+                judecator = Judecator.objects.get(id_judecator=int(self.request.POST.get('ID_Judecator_add', None)))
+                proces = Proces.objects.get(id_proces=int(self.request.POST.get('ID_Proces_add', None)))
 
             programare = Programare()
             programare.judecator = judecator
@@ -55,6 +58,6 @@ class HomePageView(TemplateView):
             programare.sala = self.request.POST.get('Sala_add', None)
             programare.data = parse(self.request.POST.get('Data_add', None))
             programare.ora = parse(self.request.POST.get('Ora_add', None))
-            programare.save(force_insert=True)
+            programare.create()
 
         return self.render_to_response(self.get_context_data())
