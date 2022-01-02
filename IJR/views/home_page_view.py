@@ -13,7 +13,7 @@ class HomePageView(TemplateView):
         context = super().get_context_data(**kwargs)
         with transaction.atomic():
             procese = Proces.objects.all()
-        judecatori = Judecator.objects.all()
+            judecatori = Judecator.objects.all()
         context['procese'] = procese
         context['judecatori'] = judecatori
         return context
