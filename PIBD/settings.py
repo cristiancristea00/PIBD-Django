@@ -118,7 +118,7 @@ USE_L10N = False
 
 DATE_FORMAT = 'd.m.Y'
 
-TIME_FORMAT = 'H:s'
+TIME_FORMAT = 'H:i'
 
 DECIMAL_SEPARATOR = ','
 
