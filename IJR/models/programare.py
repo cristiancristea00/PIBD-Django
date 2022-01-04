@@ -5,8 +5,8 @@ from IJR.models import Judecator, Proces
 
 class Programare(models.Model):
     id_programare = models.BigAutoField('ID Programare', db_column='ID_PROGRAMARE', primary_key=True)
-    judecator = models.ForeignKey(Judecator, models.CASCADE, db_column='ID_JUDECATOR')
-    proces = models.ForeignKey(Proces, models.CASCADE, db_column='ID_PROCES')
+    judecator = models.ForeignKey(Judecator, on_delete=models.CASCADE, db_column='ID_JUDECATOR')
+    proces = models.ForeignKey(Proces, on_delete=models.CASCADE, db_column='ID_PROCES')
     oras = models.CharField('Oraș', db_column='ORAȘ', max_length=20)
     locatie = models.CharField('Locație', db_column='LOCAȚIE', max_length=50)
     sala = models.CharField('Sala', db_column='SALA', max_length=10)
