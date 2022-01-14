@@ -38,11 +38,11 @@ class Judecator(models.Model):
 
     @property
     def nume_complet(self):
-        return F"{self.prenume} {self.nume}"
+        return F'{self.prenume} {self.nume}'
 
     @property
     def represent(self):
-        return F"{self.nume_complet} ({self.cnp})"
+        return F'{self.nume_complet} ({self.cnp})'
 
     def create(self):
         with transaction.atomic():

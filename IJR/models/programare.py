@@ -25,7 +25,7 @@ class Programare(models.Model):
 
     @property
     def represent(self):
-        return F"{self.proces.numar} - {self.judecator.prenume} {self.judecator.nume} ({self.judecator.cnp})"
+        return F'{self.proces.numar} - {self.judecator.prenume} {self.judecator.nume} ({self.judecator.cnp})'
 
     def create(self):
         with transaction.atomic():

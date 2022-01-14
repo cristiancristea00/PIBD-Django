@@ -5,11 +5,11 @@ from django.db import models, transaction
 
 class Proces(models.Model):
     PROCES_CHOICES: Final = [
-        ("Apel", "Apel"),
-        ("Fond", "Fond"),
-        ("Recurs", "Recurs"),
-        ("Revizuire", "Revizuire"),
-        ("Contestație", "Contestație")
+        ('Apel', 'Apel'),
+        ('Fond', 'Fond'),
+        ('Recurs', 'Recurs'),
+        ('Revizuire', 'Revizuire'),
+        ('Contestație', 'Contestație')
     ]
 
     id_proces = models.BigAutoField('ID Proces', db_column='ID_PROCES', primary_key=True)
@@ -32,7 +32,7 @@ class Proces(models.Model):
 
     @property
     def represent(self):
-        return F"{self.numar} ({self.obiect})"
+        return F'{self.numar} ({self.obiect})'
 
     def create(self):
         with transaction.atomic():
