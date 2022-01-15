@@ -16,7 +16,8 @@ class Proces(models.Model):
     numar = models.CharField('Număr', db_column='NUMĂR', unique=True, max_length=15)
     obiect = models.CharField('Obiect', db_column='OBIECT', max_length=100)
     materie_juridica = models.CharField('Materie juridică', db_column='MATERIE_JURIDICĂ', max_length=50)
-    stadiu_procesual = models.CharField('Stadiu procesual', db_column='STADIU_PROCESUAL', max_length=15, choices=PROCES_CHOICES)
+    stadiu_procesual = models.CharField('Stadiu procesual', db_column='STADIU_PROCESUAL', max_length=15,
+                                        choices=PROCES_CHOICES)
     reclamant = models.CharField('Reclamant', db_column='RECLAMANT', max_length=100)
     parat = models.CharField('Pârât', db_column='PÂRÂT', max_length=100)
 
