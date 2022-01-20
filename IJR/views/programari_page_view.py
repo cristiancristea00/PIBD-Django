@@ -21,8 +21,7 @@ class ProgramariPageView(TemplateView):
         if self.request.POST.get('updateProgramare') is not None:
 
             with transaction.atomic():
-                programare = Programare.objects.get(
-                    id_programare=int(self.request.POST.get('Select_programare_Update')))
+                programare = Programare.objects.get(id_programare=int(self.request.POST.get('Select_programare_Update')))
 
             judecator = programare.judecator
             proces = programare.proces
@@ -35,17 +34,15 @@ class ProgramariPageView(TemplateView):
             ora = self.request.POST.get('Ora_update')
             ora = parse(ora) if ora != '' else programare.ora
 
-            programare = Programare(id_programare=programare.id_programare, judecator=judecator,
-                                    proces=proces,
-                                    oras=oras, locatie=locatie, data=data, ora=ora)
+            programare = Programare(id_programare=programare.id_programare, judecator=judecator, proces=proces, oras=oras, locatie=locatie, data=data,
+                                    ora=ora)
 
             programare.update()
 
         elif self.request.POST.get('deleteProgramare') is not None:
 
             with transaction.atomic():
-                programare = Programare.objects.get(
-                    id_programare=int(self.request.POST.get('Select_programare_Delete')))
+                programare = Programare.objects.get(id_programare=int(self.request.POST.get('Select_programare_Delete')))
 
             programare.remove()
 

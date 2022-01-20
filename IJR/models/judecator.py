@@ -24,8 +24,7 @@ class Judecator(models.Model):
     prenume = models.CharField('Prenume', db_column='PRENUME', max_length=50)
     telefon = models.CharField('Telefon', db_column='TELEFON', unique=True, max_length=13)
     email = models.CharField('Email', db_column='EMAIL', unique=True, max_length=50)
-    specializare = models.CharField('Specializare', db_column='SPECIALIZARE', max_length=100,
-                                    choices=SPECIALIZARE_CHOICES)
+    specializare = models.CharField('Specializare', db_column='SPECIALIZARE', max_length=100, choices=SPECIALIZARE_CHOICES)
     preluare_mandat = models.DateField('Preluare mandat', db_column='PRELUARE_MANDAT')
     expirare_mandat = models.DateField('Expirare mandat', db_column='EXPIRARE_MANDAT')
 

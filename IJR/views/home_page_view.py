@@ -20,7 +20,7 @@ class HomePageView(TemplateView):
 
     def post(self, request, *args, **kwargs):
 
-        if self.request.POST.get('addJudecator', None) is not None:
+        if self.request.POST.get('addJudecator') is not None:
 
             judecator = Judecator()
             judecator.cnp = self.request.POST.get('CNP_add')

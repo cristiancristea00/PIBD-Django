@@ -33,9 +33,8 @@ class ProcesePageView(TemplateView):
             parat = self.request.POST.get('Parat_update')
             parat = parat if parat != '' else proces.parat
 
-            proces = Proces(id_proces=proces.id_proces, numar=numar, obiect=obiect,
-                            materie_juridica=materie_juridica, stadiu_procesual=stadiu_procesual,
-                            reclamant=reclamant, parat=parat)
+            proces = Proces(id_proces=proces.id_proces, numar=numar, obiect=obiect, materie_juridica=materie_juridica,
+                            stadiu_procesual=stadiu_procesual, reclamant=reclamant, parat=parat)
 
             proces.update()
 

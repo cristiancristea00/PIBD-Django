@@ -21,8 +21,7 @@ class JudecatoriPageView(TemplateView):
         if self.request.POST.get('updateJudecator') is not None:
 
             with transaction.atomic():
-                judecator = Judecator.objects.get(
-                    id_judecator=int(self.request.POST.get('Select_judecator_Update')))
+                judecator = Judecator.objects.get(id_judecator=int(self.request.POST.get('Select_judecator_Update')))
 
             cnp = self.request.POST.get('CNP_update')
             cnp = cnp if cnp != '' else judecator.cnp
@@ -41,9 +40,8 @@ class JudecatoriPageView(TemplateView):
             expirare_mandat = self.request.POST.get('Expirare_mandat_update')
             expirare_mandat = parse(expirare_mandat) if expirare_mandat != '' else judecator.expirare_mandat
 
-            judecator = Judecator(id_judecator=judecator.id_judecator, cnp=cnp, nume=nume, prenume=prenume,
-                                  telefon=telefon, email=email, specializare=specializare,
-                                  preluare_mandat=preluare_mandat, expirare_mandat=expirare_mandat)
+            judecator = Judecator(id_judecator=judecator.id_judecator, cnp=cnp, nume=nume, prenume=prenume, telefon=telefon, email=email,
+                                  specializare=specializare, preluare_mandat=preluare_mandat, expirare_mandat=expirare_mandat)
 
             judecator.update()
 
