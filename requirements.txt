@@ -1,2 +1,3 @@
-django
-python-dateutil
+Django==4.0.1
+mysqlclient==2.1.0
+python-dateutil==2.8.2
